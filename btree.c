@@ -11,24 +11,24 @@ typedef struct page {
   struct page *branch[2 * M + 1]; /* 他ページへのポインタ */
 } *pageptr; /* pageptrはページへのポインタの型 */
 
-pageptr root = NULL; /* B木の根 */
-keytype key; /* キー */
-boolean done, deleted, undersize; /* 論理型の変数 */
-pageptr newp; /* insert()の生成した新しいページ */
-char *message; /* 関数の返すメッセージ */
+pageptr root = NULL; /* root of a btree */
+keytype key; /* key */
+boolean done, deleted, undersize; /* variables of boolean */
+pageptr newp; /* a new page made by insert() */
+char *message; /* message returned by function */
 
 /* 新しいページの生成 */
 pageptr newpage(void) {
   pageptr p; 
 
   if ((p = malloc(sizeof *p)) == NULL) {
-    printf("メモリ不足.\n"); 
+    printf("lack of memory.\n"); 
     exit(EXIT_FAILURE); 
   }
   return p; 
 }
 
-/* キーをB木から探す */
+/* find a key from a btree */
 void search(void) {
   pageptr p; 
   int k; 
